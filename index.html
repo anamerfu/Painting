@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<title>Week 5</title>
+</head>
+<body>
+  
+  <section id="colors">
+      <figure class="color" id="blue"></figure>
+      <figure class="color" id="red"></figure>
+      <figure class="color" id="yellow"></figure>
+  </section>
+   <canvas id="myCanvas" width="700" height="300" style="border:1px solid #000000;">
+       Your browser does not support html canvas.
+</canvas>
+    
+    <script>
+        window.onload = function() {
+            var theCanvas = document.getElementById("myCanvas");
+            if(theCanvas && theCanvas.getContext) {
+                var ctx = theCanvas.getContext("2d");
+                var mouse = {x: 0, y: 0};
+                if (ctx) {
+                    
+                    ctx.strokeStyle ="red";
+                    ctx.lineWidth = 5; 
+  
+                    ctx.lineCap = 'round';
+     
+                    
+                    var isMouseDown = false;
+                    var mouse = {x:0, y:0};
+                    theCanvas.addEventListener("mousedown", mouseDown);
+                    theCanvas.addEventListener("mouseup", mouseUp);
+                    
+                    
+                    function mouseDown() {
+                        isMouseDown=true;
+                        console.log("mouse is down");
+                        theCanvas.addEventListener("mousemove", mouseMoving);
+                        mouse.x = event.pageX - this.offsetLeft;
+                        mouse.y = event.pageY - this.offsetTop;
+                        ctx.beginPath();
+                        ctx.moveTo(mouse.x, mouse.y);
+                        
+                    
+                    };
+                    
+                    
+                    function mouseMoving(){
+                        mouse.x = event.pageX - this.offsetLeft;
+                        mouse.y = event.pageY - this.offsetTop;
+                        if (isMouseDown){
+                            console.log("mouse is drawing");
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.stroke();
+                            
+                            
+                        }
+                    }
+                    
+                    function mouseUp(){
+                        isMouseDown=false; 
+                        console.log("mouse is up");
+                    };
+                                
+                    
+                                                   
+                        
+        
+                    };
+                  
+
+
+                    
+                }
+            }
+        
+    </script>
+</body>
